@@ -43,7 +43,7 @@ alias gfp="git fetch && git pull"
 alias gd="git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 alias ghpr="gh pr create --web"
 alias gb="git checkout -b"
-alias p8 = "ping 8.8.8.8"
+alias p8="ping 8.8.8.8"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey -v
