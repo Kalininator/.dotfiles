@@ -44,6 +44,7 @@ alias gfp="git fetch && git pull"
 alias ghpr="gh pr create --web"
 alias gb="git checkout -b"
 alias p8="ping 8.8.8.8"
+alias st="speedtest"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey -v
