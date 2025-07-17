@@ -37,6 +37,7 @@ alias flushdns="sudo killall -HUP mDNSResponder"
 alias cddot="cd ~/.dotfiles"
 alias tf="terraform"
 alias tfp="terraform plan"
+alias tfa="terraform apply"
 # alias git-ssh="git remote set-url origin git@github.com:\$(git remote get-url origin | sed 's/https:\/\/github.com\///' | sed 's/git@github.com://')"
 alias gp="git push"
 alias gfp="git fetch && git pull"
@@ -45,6 +46,7 @@ alias ghpr="gh pr create --web"
 alias gb="git checkout -b"
 alias p8="ping 8.8.8.8"
 alias st="speedtest"
+alias br="./bin/dev.js"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey -v
@@ -69,3 +71,9 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ulimit -Sn 10240
+
+export PATH="/opt/homebrew/opt/python@3.12/libexec/bin:$PATH"
+eval "$(~/.local/bin/mise activate zsh)"
+
+source <(fzf --zsh)
+eval "$(~/.local/bin/mise activate)"
