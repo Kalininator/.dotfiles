@@ -6,17 +6,33 @@
     state: present
   vars:
     packages:
-      - flux
       - alfred
       - github
-      - postman
       - whatsapp
-      # - 1password
+      - 1password-cli
       - iterm2
-      # - notion
+      - notion
       - google-chrome
       - firefox
-      - avibrazil-rdm
-      - datagrip
       - visual-studio-code
-      - docker
+      - orbstack
+
+- name: brew packages
+  community.general.homebrew:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+      - ansible
+      - flyctl
+      - fzf
+      - gh
+      - neovim
+      - neofetch
+      - nmap
+      - ranger
+      - ripgrep
+      - speedtest
+      - stow
+      - terraform
+      - tmux
