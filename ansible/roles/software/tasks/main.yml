@@ -1,0 +1,22 @@
+---
+
+- name: brew cask software
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - flux
+      - alfred
+      - github
+      - postman
+      - whatsapp
+      # - 1password
+      - iterm2
+      # - notion
+      - google-chrome
+      - firefox
+      - avibrazil-rdm
+      - datagrip
+      - visual-studio-code
+      - docker
