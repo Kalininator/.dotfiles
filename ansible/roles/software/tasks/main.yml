@@ -25,6 +25,8 @@
   vars:
     packages:
       - ansible
+      - mise
+      - powerlevel9k
       - fzf
       - gh
       - neovim

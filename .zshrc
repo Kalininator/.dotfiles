@@ -73,7 +73,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ulimit -Sn 10240
 
 export PATH="/opt/homebrew/opt/python@3.12/libexec/bin:$PATH"
-eval "$(~/.local/bin/mise activate zsh)"
 
 source <(fzf --zsh)
-eval "$(~/.local/bin/mise activate)"
+eval "$(mise activate zsh)"
