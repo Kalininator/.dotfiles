@@ -24,7 +24,6 @@
   vars:
     packages:
       - ansible
-      - flyctl
       - fzf
       - gh
       - neovim
@@ -34,5 +33,4 @@
       - ripgrep
       - speedtest
       - stow
-      - terraform
       - tmux
