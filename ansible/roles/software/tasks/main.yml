@@ -23,7 +23,6 @@
     state: latest
   vars:
     packages:
-      - ansible
       - mise
       - powerlevel9k
       - fzf
