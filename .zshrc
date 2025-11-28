@@ -5,7 +5,6 @@ export TERM="xterm-256color"
 # export ZSH="/Users/kal/.oh-my-zsh"
 # source $ZSH/oh-my-zsh.sh
 
-source /opt/homebrew/opt/spaceship/spaceship.zsh
 
 export PATH=${HOME}/go/bin:$PATH
 # source /opt/homebrew/opt/powerlevel9k/powerlevel9k.zsh-theme
@@ -79,3 +78,6 @@ export PATH="/opt/homebrew/opt/python@3.12/libexec/bin:$PATH"
 
 source <(fzf --zsh)
 eval "$(mise activate zsh)"
+
+# source /opt/homebrew/opt/spaceship/spaceship.zsh
+eval "$(starship init zsh)"
