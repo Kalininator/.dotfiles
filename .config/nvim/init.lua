@@ -293,6 +293,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   'tpope/vim-surround',
   'tpope/vim-repeat',
+  'tpope/vim-rails',
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
