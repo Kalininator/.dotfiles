@@ -1,5 +1,5 @@
 [font]
-normal = { family = "ComicCode Nerd Font", style = "Regular" }
+normal = { family = "ComicCode Nerd Font Mono", style = "Regular" }
 offset = {  y = -4 }
 glyph_offset = { y = 0}
 size = 12
