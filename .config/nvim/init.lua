@@ -287,7 +287,7 @@ require('lazy').setup({
     'tpope/vim-fugitive',
     config = function()
       vim.keymap.set('n', '<leader>Gs', vim.cmd.Git, {})
-      vim.keymap.set('n', '<leader>Gp', vim.cmd 'Git push', {})
+      vim.keymap.set('n', '<leader>Gp', ':Git push<CR>', {})
     end,
   },
   'tpope/vim-rhubarb',
