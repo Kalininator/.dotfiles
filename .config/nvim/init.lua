@@ -722,6 +722,7 @@ require('lazy').setup({
         jsonls = {},
         terraformls = {},
         solargraph = {},
+        rubocop = {},
         --
 
         lua_ls = {
