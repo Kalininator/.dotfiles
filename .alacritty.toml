@@ -2,7 +2,7 @@
 normal = { family = "ComicCode Nerd Font Mono", style = "Regular" }
 offset = {  y = -4 }
 glyph_offset = { y = 0}
-size = 12
+size = 11
 
 [window]
 decorations = "None"
