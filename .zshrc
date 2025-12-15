@@ -48,6 +48,8 @@ alias gb="git checkout -b"
 alias p8="ping 8.8.8.8"
 alias st="speedtest"
 alias br="./bin/dev.js"
+alias bd="bin/dev"
+alias dbm="rails db:migrate"
 alias mr="mise run"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

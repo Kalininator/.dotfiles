@@ -288,6 +288,8 @@ require('lazy').setup({
     config = function()
       vim.keymap.set('n', '<leader>Gs', vim.cmd.Git, {})
       vim.keymap.set('n', '<leader>Gp', ':Git push<CR>', {})
+      vim.keymap.set('n', '<leader>Gb', ':GBrowse<CR>', {})
+      vim.keymap.set('v', '<leader>Gb', ':GBrowse<CR>', {})
     end,
   },
   'tpope/vim-rhubarb',
