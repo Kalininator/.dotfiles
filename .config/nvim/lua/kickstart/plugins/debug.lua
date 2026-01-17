@@ -34,6 +34,16 @@ return {
     { '<F7>', function() require('dapui').toggle() end, desc = 'Debug: Toggle UI' },
 
     -- Leader prefixed (visible in which-key)
+    { '<leader>da', function()
+      require('dap').run({
+        type = 'ruby',
+        name = 'attach',
+        request = 'attach',
+        localfs = true,
+        command = 'rdbg',
+        port = 38698,
+      })
+    end, desc = '[D]ebug [A]ttach (port 38698)' },
     { '<leader>dc', function() require('dap').continue() end, desc = '[D]ebug [C]ontinue' },
     { '<leader>di', function() require('dap').step_into() end, desc = '[D]ebug Step [I]nto' },
     { '<leader>do', function() require('dap').step_over() end, desc = '[D]ebug Step [O]ver' },

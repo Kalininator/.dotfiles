@@ -37,6 +37,12 @@ gem "debug", platforms: %i[ mri windows ]
 Workflow:
 1. Run `bin/dev` in a terminal
 2. In nvim, set breakpoints with `<leader>b`
-3. `<leader>dc` or `<F5>` → select "attach"
+3. `<leader>da` to attach (instant, no prompts)
 4. Trigger code path in browser
 5. `<leader>d` shows all debug commands
+
+Inspecting variables:
+- **Scopes panel** (left): Shows local/instance variables. Press `<CR>` to expand items (`▸` → `▾`)
+- **REPL** (bottom): Type expressions directly, e.g. `params`, `@user.email`, `self`
+- **Watches panel**: Press `a` to add a watch expression
+- **Hover**: Move cursor over a variable in code to see its value
