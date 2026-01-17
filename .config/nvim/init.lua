@@ -839,7 +839,6 @@ require('lazy').setup({
         jsonls = {},
         terraformls = {},
         ruby_lsp = {},
-        rubocop = {},
         copilot = {},
         --
 
@@ -927,7 +926,6 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        ruby = { 'rubocop' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
