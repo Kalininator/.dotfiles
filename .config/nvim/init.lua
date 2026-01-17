@@ -748,7 +748,7 @@ require('lazy').setup({
         cssls = {},
         jsonls = {},
         terraformls = {},
-        solargraph = {},
+        ruby_lsp = {},
         rubocop = {},
         copilot = {},
         --
