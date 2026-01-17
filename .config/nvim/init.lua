@@ -298,6 +298,95 @@ require('lazy').setup({
   'tpope/vim-rails',
 
   {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'antoinemadec/FixCursorHold.nvim',
+      'zidhuss/neotest-minitest',
+      'olimorris/neotest-rspec',
+    },
+    event = { 'BufReadPost *_test.rb', 'BufReadPost *_spec.rb' },
+    keys = {
+      {
+        '<leader>tn',
+        function()
+          require('neotest').run.run()
+        end,
+        desc = '[T]est [N]earest',
+      },
+      {
+        '<leader>tf',
+        function()
+          require('neotest').run.run(vim.fn.expand '%')
+        end,
+        desc = '[T]est [F]ile',
+      },
+      {
+        '<leader>ts',
+        function()
+          require('neotest').summary.toggle()
+        end,
+        desc = '[T]est [S]ummary',
+      },
+      {
+        '<leader>to',
+        function()
+          require('neotest').output.open { enter = true }
+        end,
+        desc = '[T]est [O]utput',
+      },
+      {
+        '<leader>tp',
+        function()
+          require('neotest').output_panel.toggle()
+        end,
+        desc = '[T]est [P]anel',
+      },
+      {
+        '<leader>tl',
+        function()
+          require('neotest').run.run_last()
+        end,
+        desc = '[T]est [L]ast',
+      },
+      {
+        '<leader>td',
+        function()
+          require('neotest').run.run { strategy = 'dap' }
+        end,
+        desc = '[T]est [D]ebug nearest',
+      },
+    },
+    config = function()
+      local neotest = require 'neotest'
+      neotest.setup {
+        adapters = {
+          require 'neotest-minitest' {
+            test_cmd = function()
+              return vim.tbl_flatten { 'bundle', 'exec', 'rails', 'test' }
+            end,
+          },
+          require 'neotest-rspec' {
+            rspec_cmd = function()
+              return vim.tbl_flatten { 'bundle', 'exec', 'rspec' }
+            end,
+          },
+        },
+        consumers = {
+          always_open_summary = function(client)
+            client.listeners.run = function()
+              neotest.summary.open()
+            end
+            return {}
+          end,
+        },
+      }
+    end,
+  },
+
+  {
     'greggh/claude-code.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim', -- Required for git operations
@@ -382,7 +471,7 @@ require('lazy').setup({
       -- Document existing key chains
       spec = {
         { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t', group = '[T]est' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>d', group = '[D]ebug' },
       },
