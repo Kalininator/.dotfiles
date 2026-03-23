@@ -60,7 +60,7 @@ addToPathFront() {
         export PATH=$1:$PATH
     fi
 }
-addToPathFront $HOME/.local/bin
+addToPathFront $HOME/.dotfiles/bin
 # alias tmux-sessionizer="~/.local/bin/tmux-sessionizer"
 bindkey -s ^f "tmux-sessionizer\n"
 
