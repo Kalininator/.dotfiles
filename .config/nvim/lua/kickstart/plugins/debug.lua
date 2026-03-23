@@ -44,6 +44,45 @@ return {
         port = 38698,
       })
     end, desc = '[D]ebug [A]ttach (port 38698)' },
+    { '<leader>dA', function()
+      require('dap').continue()
+    end, desc = '[D]ebug [A]ttach (pick config)' },
+    { '<leader>ds', function()
+      -- Find rdbg debug port by looking for ruby processes listening on non-Rails ports
+      local lines = vim.fn.systemlist("lsof -iTCP -sTCP:LISTEN -P -a -c ruby 2>/dev/null | awk 'NR>1 {print $9}'")
+      local ports = {}
+      for _, line in ipairs(lines) do
+        local port = line:match(':(%d+)$')
+        if port and port ~= '3000' then
+          ports[port] = true
+        end
+      end
+      local unique = vim.tbl_keys(ports)
+      if #unique == 0 then
+        vim.notify('No rdbg TCP port found', vim.log.levels.WARN)
+        return
+      end
+      local function attach(port)
+        local dap = require('dap')
+        dap.adapters.rdbg_attach = function(callback)
+          callback({ type = 'server', host = '127.0.0.1', port = tonumber(port) })
+        end
+        dap.run({
+          type = 'rdbg_attach',
+          name = 'attach (auto)',
+          request = 'attach',
+          localfs = true,
+          options = { source_filetype = 'ruby' },
+        })
+      end
+      if #unique == 1 then
+        attach(unique[1])
+      else
+        vim.ui.select(unique, { prompt = 'Select rdbg port:' }, function(choice)
+          if choice then attach(choice) end
+        end)
+      end
+    end, desc = '[D]ebug Attach [S]ocket (auto-discover)' },
     { '<leader>dc', function() require('dap').continue() end, desc = '[D]ebug [C]ontinue' },
     { '<leader>di', function() require('dap').step_into() end, desc = '[D]ebug Step [I]nto' },
     { '<leader>do', function() require('dap').step_over() end, desc = '[D]ebug Step [O]ver' },
@@ -60,6 +99,8 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    dap.set_log_level('TRACE')
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
