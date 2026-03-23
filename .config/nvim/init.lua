@@ -372,6 +372,8 @@ require('lazy').setup({
             rspec_cmd = function()
               return vim.tbl_flatten { 'bundle', 'exec', 'rspec' }
             end,
+            root_files = { 'Gemfile' },
+            engine_support = false,
           },
         },
         consumers = {
@@ -838,7 +840,7 @@ require('lazy').setup({
         cssls = {},
         jsonls = {},
         terraformls = {},
-        ruby_lsp = {},
+        -- ruby_lsp is configured separately below (not managed by Mason)
         copilot = {},
         --
 
@@ -891,6 +893,14 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- ruby_lsp via mise (not Mason) so it uses the correct Ruby version
+      vim.lsp.config('ruby_lsp', {
+        cmd = { 'mise', 'exec', '--', 'ruby-lsp' },
+        capabilities = capabilities,
+      })
+      vim.lsp.enable('ruby_lsp')
+
     end,
   },
 
