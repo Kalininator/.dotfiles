@@ -1139,11 +1139,12 @@ require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter-context', opts = { max_lines = 3 } },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     dependencies = {
       'RRethy/nvim-treesitter-endwise',
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'master' },
     },
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
