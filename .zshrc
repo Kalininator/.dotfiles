@@ -51,6 +51,7 @@ alias br="./bin/dev.js"
 alias bd="bin/dev"
 alias dbm="rails db:migrate"
 alias mr="mise run"
+alias c="claude"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey -v
