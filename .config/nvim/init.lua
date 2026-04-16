@@ -1145,6 +1145,7 @@ require('lazy').setup({
     dependencies = {
       'RRethy/nvim-treesitter-endwise',
       { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'master' },
+      'andymass/vim-matchup',
     },
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
@@ -1160,6 +1161,7 @@ require('lazy').setup({
       },
       indent = { enable = true, disable = { 'ruby' } },
       endwise = { enable = true }, -- Auto-add 'end' in Ruby, Lua, etc.
+      matchup = { enable = true },
       textobjects = {
         select = {
           enable = true,
