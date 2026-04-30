@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    cat <<EOF
+Usage: git contributions [BRANCH] [--include-bots]
+
+GitHub-style contributors table for the current repo.
+
+Arguments:
+  BRANCH           branch to scan (default: main)
+
+Options:
+  --include-bots   include accounts ending in [bot]
+  -h, --help       show this help
+EOF
+}
+
+branch="main"
+include_bots=0
+
+for arg in "$@"; do
+    case "$arg" in
+        -h|--help) usage; exit 0 ;;
+        --include-bots) include_bots=1 ;;
+        -*) echo "unknown flag: $arg" >&2; exit 2 ;;
+        *) branch="$arg" ;;
+    esac
+done
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "error: not inside a git repository" >&2
+    exit 1
+fi
+
+if ! git rev-parse --verify --quiet "$branch" >/dev/null; then
+    echo "error: branch '$branch' not found (pass a branch name as the first arg)" >&2
+    exit 1
+fi
+
+git log "$branch" --no-merges --numstat --pretty=format:'%n@@@%aN' | awk -v include_bots="$include_bots" '
+    /^@@@/ {
+        author = substr($0, 4)
+        commits[author]++
+        next
+    }
+    NF == 3 && $1 ~ /^[0-9-]+$/ && $1 != "-" {
+        adds[author] += $1
+        dels[author] += $2
+    }
+    END {
+        for (a in commits) {
+            if (!include_bots && a ~ /\[bot\]$/) continue
+            churn = adds[a] + dels[a]
+            printf "%d\t%d\t%d\t%d\t%s\n", churn, commits[a], adds[a], dels[a], a
+        }
+    }
+' | sort -t$'\t' -k1,1nr | awk -F'\t' '
+    BEGIN {
+        bar = "---------------------------------------------------------------------------"
+        printf "%-32s %8s %10s %10s %10s\n", "Author", "Commits", "+", "-", "Net"
+        print bar
+    }
+    {
+        commits = $2; adds = $3; dels = $4; author = $5
+        net = adds - dels
+        net_str = (net >= 0) ? "+" net : net
+        printf "%-32s %8d %10d %10d %10s\n", author, commits, adds, dels, net_str
+        tc += commits; ta += adds; td += dels
+    }
+    END {
+        print bar
+        net = ta - td
+        net_str = (net >= 0) ? "+" net : net
+        printf "%-32s %8d %10d %10d %10s\n", "Totals", tc, ta, td, net_str
+    }
+'
